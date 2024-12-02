@@ -1,0 +1,48 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+h1, h2 {
+    font-weight: bold;
+    text-align: center;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Red Team Section */
+.text-danger {
+    color: red !important;
+}
+
+.btn-danger {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Blue Team Section */
+.text-success {
+    color: green !important;
+}
+
+.btn-success {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Game Log */
+.list-group {
+    margin-top: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.list-group-item {
+    font-size: 1rem;
+    border-radius: 5px;
+}

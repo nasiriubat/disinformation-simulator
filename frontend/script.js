@@ -45,6 +45,16 @@ document.getElementById('loadSampleData').addEventListener('click', async functi
             const data = await response.json();
             toastr.success("Sample data loaded successfully!", "Success");
             updateTweetDisplay(data); // Call the function to update the tweets on the UI
+            const tweetsContainer = document.getElementById('tweets');
+            const showTweetsButton = document.getElementById('showTweetsButton');
+            if (window.innerWidth < 768) {
+                
+                // showTweetsButton.classList.add('d-none');
+                tweetsContainer.classList.remove('d-none');
+                showTweetsButton.onclick = () => {
+                    tweetsContainer.classList.toggle('d-none');
+                };
+            }
         } else {
             const errorData = await response.json();
             toastr.error(errorData.error || "Failed to load sample data.", "Error");
@@ -111,12 +121,12 @@ async function fetchGuide(tweetContent) {
     const guideDataElement = document.querySelector('.guide-data');
     const loadingScreen = document.getElementById('loadingScreen');
 
-    
+
     try {
         // Show loading animation
         loadingScreen.classList.add('active');
         const startTime = Date.now(); // Track start time
-        
+
         const response = await fetch(`https://disinformation-simulator.onrender.com/api/guide`, {
             method: 'POST',
             headers: {
@@ -124,7 +134,7 @@ async function fetchGuide(tweetContent) {
             },
             body: JSON.stringify({ tweet: tweetContent }), // Send tweet content to backend
         });
-        
+
         const data = await response.json();
         guideDataElement.style.display = 'block';
 
@@ -217,6 +227,15 @@ async function fetchGuide(tweetContent) {
                     toastr.error("Failed to copy counter tweet.", "Error");
                 });
         });
+        const tweetsContainer = document.getElementById('tweets');
+        const showTweetsButton = document.getElementById('showTweetsButton');
+        if (window.innerWidth < 768) {
+            // showTweetsButton.classList.add('d-none');
+            tweetsContainer.classList.add('d-none');
+            showTweetsButton.onclick = () => {
+                tweetsContainer.classList.toggle('d-none');
+            };
+        }
     } catch (error) {
         console.error('Error fetching guide:', error);
         toastr.error("An error occurred while loading the guide.", "Error");

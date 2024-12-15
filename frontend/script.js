@@ -17,7 +17,7 @@ document.getElementById('uploadForm').addEventListener('submit', async function 
     formData.append('file', file); // Append the file to the form data
 
     try {
-        const response = await fetch('http://localhost:3000/api/postdata', {
+        const response = await fetch('https://disinformation-simulator.onrender.com/api/postdata', {
             method: 'POST',
             body: formData, // Send the form data
         });
@@ -37,7 +37,7 @@ document.getElementById('uploadForm').addEventListener('submit', async function 
 
 document.getElementById('loadSampleData').addEventListener('click', async function () {
     try {
-        const response = await fetch('http://localhost:3000/api/sampledata', {
+        const response = await fetch('https://disinformation-simulator.onrender.com/api/sampledata', {
             method: 'GET',
         });
 
@@ -117,7 +117,7 @@ async function fetchGuide(tweetContent) {
         loadingScreen.classList.add('active');
         const startTime = Date.now(); // Track start time
         
-        const response = await fetch(`http://localhost:3000/api/guide`, {
+        const response = await fetch(`https://disinformation-simulator.onrender.com/api/guide`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -230,7 +230,7 @@ async function fetchGuide(tweetContent) {
 
 
 //     try {
-//         const response = await fetch(`http://localhost:3000/api/guide`, {
+//         const response = await fetch(`https://disinformation-simulator.onrender.com/api/guide`, {
 //             method: 'POST',
 //             headers: {
 //                 'Content-Type': 'application/json',

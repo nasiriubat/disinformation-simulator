@@ -66,6 +66,69 @@ app.post('/api/postdata', upload.single('file'), (req, res) => {
     }
 });
 
+app.post('/api/generate-tweet', async (req, res) => {
+    const { query } = req.body;
+    const { tweetCount } = req.body;
+
+    // Ensure the file exists
+    if (!query && !tweetCount) {
+        return res.status(400).json({ error: 'All fields are required.' });
+    }
+
+    try {
+        const prompt = `
+        Generate ${tweetCount} tweets on the topic "${query}", can be True, Misinformation, or Disinformation. 
+        Provide the response in the following format:
+
+        "1. Elon Musk loses in Tesla due to poor management decisions and plummeting stock prices #elonTesla #teslaShare #stock #bignews etc",
+        "2. Rumors circulating that Elon Musk is stepping down as CEO of Tesla after financial struggles #finance #news #wow etc" 
+         `;
+
+        // Call OpenAI API
+        const response = await openai.chat.completions.create({
+            model: "gpt-3.5-turbo",
+            messages: [{ role: "user", content: prompt }],
+            max_tokens: 700,
+        });
+
+        // Extract the content from OpenAI response
+        let rawContent = response.choices[0]?.message?.content?.trim();
+
+        if (!rawContent) {
+            throw new Error("No content received from the OpenAI API.");
+        }
+
+        let parsedTweets;
+        try {
+            console.log('Attempting to parse response as JSON.');
+            // If OpenAI returned JSON-like output, parse it
+            parsedTweets = JSON.parse(rawContent).tweets.map((tweet, index) => ({
+                tweet: `${index + 1}. "${tweet}"`,
+            }));
+        } catch (error) {
+            console.warn('Response is not valid JSON. Proceeding with manual parsing.');
+
+            // Manual parsing for plain text output
+            parsedTweets = rawContent
+                .split('\n') // Split into lines
+                .map(line => line.trim()) // Trim whitespace
+                .filter(line => line.match(/^\d+\.\s/)) // Keep only lines starting with numbers
+                .map((line) => ({
+                    tweet: line, // Use the original line directly
+                }));
+        }
+
+        if (!parsedTweets || parsedTweets.length === 0) {
+            throw new Error('Parsed response is invalid.');
+        }
+
+        res.json({"tweets":parsedTweets}); // Send the structured response
+    } catch (error) {
+        console.error('Error occurred:', error);
+        res.status(500).json({ error: 'Failed to generate tweets.' });
+    }
+});
+
 app.get('/api/sampledata', (req, res) => {
     const filePath = path.join(__dirname, 'tweets.txt'); // Path to the tweets.txt file
 

@@ -35,9 +35,53 @@ document.getElementById('uploadForm').addEventListener('submit', async function 
     }
 });
 
+document.getElementById('generateForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    // Get the input from the textarea
+    const promptInput = document.getElementById('prompt-input').value.trim();
+    const tweetCount = document.getElementById('tweetCount').value.trim();
+
+    // Validate the input
+    if (!promptInput) {
+        toastr.error("Please enter a topic or prompt for the tweet.", "Invalid Input");
+        return;
+    }
+
+    // Prepare the payload
+    const requestBody = { query: promptInput, tweetCount };
+
+    try {
+        // Send the POST request to the server
+        const response = await fetch('https://disinformation-simulator.onrender.com/api/generate-tweet', {
+        // const response = await fetch('http://localhost:3000/api/generate-tweet', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestBody), // Send the JSON payload
+        });
+
+        if (response.ok) {
+            // Parse the response data
+            const data = await response.json();
+            toastr.success("Tweet generated successfully!", "Success");
+            // Call a function to update the UI with the generated tweet (replace this with your logic)
+            updateTweetDisplay(data);
+        } else {
+            const errorData = await response.json();
+            toastr.error(errorData.error || "An error occurred while generating the tweet.", "Error");
+        }
+    } catch (error) {
+        toastr.error("Could not connect to the server. Please try again later.", "Network Error");
+    }
+});
+
+
 document.getElementById('loadSampleData').addEventListener('click', async function () {
     try {
         const response = await fetch('https://disinformation-simulator.onrender.com/api/sampledata', {
+        // const response = await fetch('http://localhost:3000/api/sampledata', {
             method: 'GET',
         });
 
@@ -48,7 +92,7 @@ document.getElementById('loadSampleData').addEventListener('click', async functi
             const tweetsContainer = document.getElementById('tweets');
             const showTweetsButton = document.getElementById('showTweetsButton');
             if (window.innerWidth < 768) {
-                
+
                 // showTweetsButton.classList.add('d-none');
                 tweetsContainer.classList.remove('d-none');
                 showTweetsButton.onclick = () => {
@@ -68,6 +112,7 @@ document.getElementById('loadSampleData').addEventListener('click', async functi
 
 // Function to update tweet display with responsiveness
 function updateTweetDisplay(data) {
+    console.log(data.tweets);
     const tweetsContainer = document.getElementById('tweets');
     const showTweetsButton = document.getElementById('showTweetsButton');
     const tweetListElement = document.querySelector('#tweetList');

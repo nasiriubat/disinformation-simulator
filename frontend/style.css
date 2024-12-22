@@ -8,13 +8,16 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 1000;
 }
-.topbar .nav-link{
+
+.topbar .nav-link {
     font-size: 1.3rem;
 }
-.navbar-brand{
+
+.navbar-brand {
     font-size: 1.5rem;
 }
-.guide-data{
+
+.guide-data {
     display: none;
 }
 
@@ -24,7 +27,9 @@ body {
     overflow: hidden;
 }
 
-.sidebar, .main-content, .guide-section {
+.sidebar,
+.main-content,
+.guide-section {
     padding: 1rem;
 }
 
@@ -38,6 +43,7 @@ body {
     width: 80%;
     text-align: center;
 }
+
 .main-content {
     /* flex: 2; */
     min-width: 65%;
@@ -59,25 +65,39 @@ body {
     justify-content: center;
     border: 1px dashed #ccc;
 }
+
 #factCheck {
     width: 100%;
     background-color: #f5f5f5;
     border: 1px dashed #ccc;
 }
-#factCheck h2{
+
+#factCheck h2 {
     font-size: 1.5rem;
     font-weight: bold;
     color: #007bff;
 }
-.form-div{
-    background-color: #e9e5e5;
+
+.form-div {
+    background-color: #f5f5f5;
+}
+
+img {
+
+    /* zoomed in */
+    /* transform: scale(1.1); */
+    max-width: 100%;
+    object-fit: contain;
+    object-position: center;
+    /* height: auto; */
+    height: 100%;
 }
 
 @media (max-width: 1024px) {
     .main-section {
         flex-direction: column;
     }
-    
+
 
     .guide-section {
         border-left: none;
@@ -89,15 +109,18 @@ body {
     .content {
         flex-direction: column;
     }
+
     .main-section {
         min-width: 100%;
     }
 
-    .sidebar, .main-content, .guide-section {
+    .sidebar,
+    .main-content,
+    .guide-section {
         width: 100%;
         flex: none;
     }
-    
+
 }
 
 .copy-btn {
@@ -117,20 +140,27 @@ body {
 .copy-btn:active {
     background-color: #003f7f;
 }
-#tweetList{
+
+#tweetList {
     display: none;
 }
+
 #copyCounterIcon {
     font-size: 18px;
-    color: #007bff; /* Blue color for the icon */
+    color: #007bff;
+    /* Blue color for the icon */
     transition: color 0.3s ease, transform 0.2s ease;
 }
 
 #copyCounterIcon:hover {
-    color: #0056b3; /* Darker blue on hover */
-    transform: scale(1.2); /* Slight zoom effect on hover */
-    cursor: pointer; /* Show pointer cursor on hover */
+    color: #0056b3;
+    /* Darker blue on hover */
+    transform: scale(1.2);
+    /* Slight zoom effect on hover */
+    cursor: pointer;
+    /* Show pointer cursor on hover */
 }
+
 /* Extra Styles for Guide Section */
 .guide-card {
     background-color: #f9f9f9;
@@ -192,6 +222,7 @@ body {
     background-color: #e6ffe6;
     border-color: #232729;
 }
+
 #factCheck {
     background-color: #e6f7ff;
     border-color: #99d6ff;
@@ -210,20 +241,24 @@ body {
 #factCheckDefence h6 {
     color: #28a745;
 }
-.list-group-item{
+
+.list-group-item {
     background-color: #e9e5e5;
     border: 1px solid #ccc;
     margin-bottom: 8px;
 }
-.list-group-item:hover{
+
+.list-group-item:hover {
     background-color: #f5f5f5;
 }
-.fact-title{
+
+.fact-title {
     font-size: 20px;
     background-color: #e9e5e5;
     margin-bottom: 8px;
     padding: 8px;
 }
+
 /* Loading Screen Styling */
 .loading-screen {
     position: fixed;
@@ -231,23 +266,26 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Black with opacity for blur effect */
-    backdrop-filter: blur(5px); /* Apply blur to the background */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Black with opacity for blur effect */
+    backdrop-filter: blur(5px);
+    /* Apply blur to the background */
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
     visibility: hidden;
     opacity: 0;
-    transition: visibility 0s, opacity 0.3s ease-in-out; /* Smooth fade */
-  }
+    transition: visibility 0s, opacity 0.3s ease-in-out;
+    /* Smooth fade */
+}
 
-  .loading-screen.active {
+.loading-screen.active {
     visibility: visible;
     opacity: 1;
-  }
+}
 
-  /* Centered Loading Icon */
-  .loading-icon {
+/* Centered Loading Icon */
+.loading-icon {
     text-align: center;
-  }
+}

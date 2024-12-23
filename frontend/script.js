@@ -179,14 +179,17 @@ function updateTweetDisplay(data) {
 
 async function fetchGuide(tweetContent) {
     const guideDataElement = document.querySelector('.guide-data');
+    const rightBannerImg = document.querySelector('.right-banner-img');
     const loadingScreen = document.getElementById('loadingScreen');
-
-
+    const mainBannerImg = document.querySelector('.main-banner-img');
+    const mainBanner = document.getElementById('mainBanner');
+    
+    
     try {
         // Show loading animation
         loadingScreen.classList.add('active');
         const startTime = Date.now(); // Track start time
-
+        
         const response = await fetch(`https://disinformation-simulator.onrender.com/api/guide`, {
             method: 'POST',
             headers: {
@@ -194,9 +197,12 @@ async function fetchGuide(tweetContent) {
             },
             body: JSON.stringify({ tweet: tweetContent }), // Send tweet content to backend
         });
-
+        
         const data = await response.json();
         guideDataElement.style.display = 'block';
+        rightBannerImg.style.display = 'none';
+        mainBannerImg.style.display = 'none';
+        mainBanner.style.display = 'block';
 
         // Ensure the loading animation stays for at least 1 second
         // const elapsedTime = Date.now() - startTime;
@@ -207,7 +213,6 @@ async function fetchGuide(tweetContent) {
         loadingScreen.classList.remove('active');
 
         // Update Main Content
-        const mainBanner = document.getElementById('mainBanner');
         mainBanner.textContent = data.old_tweet;
 
         const tweetDetails = document.getElementById('tweetDetails');
@@ -217,6 +222,7 @@ async function fetchGuide(tweetContent) {
         // tweetDetails.textContent = `${data.authentic}`;
 
         // Apply styles based on the authenticity
+        mainBanner.classList.add('p-3', 'rounded', 'text-center');
         if (data.authentic === 'True') {
             mainBanner.classList.remove('bg-warning', 'bg-danger', 'text-danger', 'text-warning');
             mainBanner.classList.add('bg-success', 'text-white'); // Bootstrap success theme

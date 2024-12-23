@@ -6,6 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const { OpenAI } = require("openai");
 const dotenv = require('dotenv');
+const axios = require('axios');
 dotenv.config();
 
 const openai = new OpenAI({
@@ -15,6 +16,7 @@ const openai = new OpenAI({
 // Initialize the app
 const app = express();
 const PORT = 3000;
+const search_url = "https://api.twitter.com/2/tweets/search/recent?query=";
 
 // Middleware
 app.use(cors());
@@ -65,6 +67,8 @@ app.post('/api/postdata', upload.single('file'), (req, res) => {
         res.status(500).json({ error: 'Failed to process the file.' });
     }
 });
+
+
 
 app.post('/api/generate-tweet', async (req, res) => {
     const { query } = req.body;
@@ -122,7 +126,7 @@ app.post('/api/generate-tweet', async (req, res) => {
             throw new Error('Parsed response is invalid.');
         }
 
-        res.json({"tweets":parsedTweets}); // Send the structured response
+        res.json({ "tweets": parsedTweets }); // Send the structured response
     } catch (error) {
         console.error('Error occurred:', error);
         res.status(500).json({ error: 'Failed to generate tweets.' });

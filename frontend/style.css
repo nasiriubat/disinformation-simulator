@@ -131,7 +131,7 @@ img {
     }
 
     #tweets {
-        max-height: 450px;
+        max-height: 350px;
         /* Set a maximum height for the list */
         overflow-y: auto;
         /* Enable vertical scrolling */

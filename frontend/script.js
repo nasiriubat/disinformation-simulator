@@ -35,6 +35,21 @@ document.getElementById('uploadForm').addEventListener('submit', async function 
     }
 });
 
+document.getElementById('checkForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    // Get the input from the textarea
+    const tweetInput = document.getElementById('tweet-input').value.trim();
+
+    // Validate the input
+    if (!tweetInput) {
+        toastr.error("Please enter a Tweet to justify.", "Invalid Input");
+        return;
+    }
+    fetchGuide(tweetInput);
+
+});
+
 document.getElementById('generateForm').addEventListener('submit', async function (e) {
     e.preventDefault();
 
@@ -54,7 +69,7 @@ document.getElementById('generateForm').addEventListener('submit', async functio
     try {
         // Send the POST request to the server
         const response = await fetch('https://disinformation-simulator.onrender.com/api/generate-tweet', {
-        // const response = await fetch('http://localhost:3000/api/generate-tweet', {
+            // const response = await fetch('http://localhost:3000/api/generate-tweet', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -81,7 +96,7 @@ document.getElementById('generateForm').addEventListener('submit', async functio
 document.getElementById('loadSampleData').addEventListener('click', async function () {
     try {
         const response = await fetch('https://disinformation-simulator.onrender.com/api/sampledata', {
-        // const response = await fetch('http://localhost:3000/api/sampledata', {
+            // const response = await fetch('http://localhost:3000/api/sampledata', {
             method: 'GET',
         });
 

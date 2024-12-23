@@ -3,10 +3,17 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
+.navbar-nav li {
+    padding: 0 10px;
+}
+.navbar-nav li a {
+    color: #000000 !important;
+}
 
 .topbar {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 1000;
+    padding: .5rem 1rem;
 }
 
 .topbar .nav-link {
@@ -87,7 +94,7 @@ img {
     /* zoomed in */
     /* transform: scale(1.1); */
     max-width: 100%;
-    object-fit: contain;
+    object-fit: cover;
     object-position: center;
     /* height: auto; */
     height: 100%;
@@ -182,7 +189,7 @@ img {
 /* Main Content Styles */
 #mainBanner {
     color: rgb(0, 0, 0);
-    padding: 16px;
+    /* padding: 16px; */
     font-size: 20px;
     border-radius: 8px;
     text-align: center;
@@ -289,3 +296,43 @@ img {
 .loading-icon {
     text-align: center;
 }
+
+/* about page start */
+.hero-section {
+    background: linear-gradient(45deg, #74a7df, #6610f2);
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+}
+.features-section h5 {
+    color: #007bff;
+}
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    background-color: #f8f9fa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+.icon-circle i {
+    font-size: 24px;
+    color: #007bff;
+}
+
+/* about page end */
+/* contact page start */
+.contact-info i {
+    font-size: 24px;
+    color: #007bff;
+}
+.contact-info p {
+    margin-bottom: 0;
+}
+.contact-form input,
+.contact-form textarea {
+    margin-bottom: 15px;
+}
+/* contact page end */

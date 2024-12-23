@@ -3,9 +3,11 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
+
 .navbar-nav li {
     padding: 0 10px;
 }
+
 .navbar-nav li a {
     color: #000000 !important;
 }
@@ -128,6 +130,13 @@ img {
         flex: none;
     }
 
+    #tweets {
+        max-height: 450px;
+        /* Set a maximum height for the list */
+        overflow-y: auto;
+        /* Enable vertical scrolling */
+    }
+
 }
 
 .copy-btn {
@@ -150,6 +159,7 @@ img {
 
 #tweetList {
     display: none;
+    overflow-y: auto;
 }
 
 #copyCounterIcon {
@@ -304,9 +314,11 @@ img {
     padding: 60px 20px;
     text-align: center;
 }
+
 .features-section h5 {
     color: #007bff;
 }
+
 .icon-circle {
     width: 60px;
     height: 60px;
@@ -317,6 +329,7 @@ img {
     justify-content: center;
     margin-bottom: 10px;
 }
+
 .icon-circle i {
     font-size: 24px;
     color: #007bff;
@@ -328,11 +341,14 @@ img {
     font-size: 24px;
     color: #007bff;
 }
+
 .contact-info p {
     margin-bottom: 0;
 }
+
 .contact-form input,
 .contact-form textarea {
     margin-bottom: 15px;
 }
+
 /* contact page end */
